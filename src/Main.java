@@ -5,5 +5,12 @@ public class Main {
         System.out.println("Hello from B");
         System.out.println("Test1");
 
+        int i=0;
+
+        while (i<10){
+            System.out.println(i);
+            i++;
+        }
+
     }
 }
