@@ -1,3 +1,4 @@
+import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -6,6 +7,7 @@ public class Main {
         /*
         System.out.println("Hello from B");
         System.out.println("Test1");
+        System.out.println();
 
         int i=0;
 
@@ -22,9 +24,25 @@ public class Main {
 
          */
 
-        for( int i =0; i<10; i++){
-            System.out.println(i);
+        System.out.println();
+        System.out.println("Enter a number: ");
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int[] seq = sequence(n);
+        System.out.println();
+
+        for( int i =0; i<n; i++){
+            System.out.println(seq[i]);
         }
 
+    }
+
+    static int[] sequence(int n){
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++){
+            arr[i] = i;
+        }
+        return arr;
     }
 }
