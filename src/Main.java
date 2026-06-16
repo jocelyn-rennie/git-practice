@@ -56,13 +56,96 @@ public class Main {
             System.out.println(name);
         }
 
-        */
+        Students one = new Students("Emma", 18, "CS");
+        //one.introduce();
 
-        Students one = new Students("Emma");
-        System.out.print("Student: ");
-        System.out.println(one.getName());
-        System.out.print("Student count: ");
-        System.out.println(one.getCount());
+        Students two = new Students("Bob", 20, "Sports");
+        //two.introduce();
+        Students three = new Students("Dave", 19, "Biology");
+        //three.introduce();
+
+        ArrayList <Students> students = new ArrayList <>();
+        students.add(one);
+        students.add(two);
+        students.add(three);
+
+        //printStudents(students);
+
+        remove(students,"Emma");
+
+        printStudents(students);
+
+        remove(students,"Dave");
+
+        printStudents(students);
+
+        remove(students,"Dave");
+
+         */
+
+        Scanner sc = new Scanner(System.in);
+        String req;
+        ArrayList <Student> students = new ArrayList<>();
+        String name;
+        int age;
+        String course;
+
+        while(true){
+            System.out.println("\nEnter a request: ");
+            System.out.println("1. Add student\n" +
+                    "2. Remove student\n" +
+                    "3. List students\n" +
+                    "4. Find student\n" +
+                    "5. Exit\n");
+
+            req = sc.next();
+
+            if(req.equals("5")){
+                break;
+            }
+
+            switch (req){
+                case "1":
+                    System.out.println("\nEnter student name: ");
+                    name = sc.next();
+                    System.out.println("Enter student age: ");
+                    age = sc.nextInt();
+                    System.out.println("Enter student course: ");
+                    course = sc.next();
+                    Student student = new Student(name, age, course);
+                    students.add(student);
+                    break;
+                case "2":
+                    System.out.println("\nEnter student name: ");
+                    name = sc.next();
+                    remove(students, name);
+                    break;
+                case "3":
+                    printStudents(students);
+                    break;
+                case "4":
+                    if (students.isEmpty()){
+                        System.out.println("\nThere are no students in the list");
+                        break;
+                    }
+                    System.out.println("\nEnter student name: ");
+                    name = sc.next();
+                    Student res = exists(students, name);
+                    if (res == null){
+                        System.out.println("\nStudent does not exist");
+                    }
+                    else{
+                        res.introduce();
+                    }
+                    break;
+
+                default:
+                    System.out.println("\nInvalid input");
+
+            }
+        }
+
+
     }
 
     // static method belongs to the class
@@ -74,5 +157,39 @@ public class Main {
             arr[i] = i;
         }
         return arr;
+    }
+    static void remove(ArrayList<Student> students, String find){
+        // can have issues removing with an enhanced for loop
+        // shouldn't use .name
+        // use getters for encapsulation
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getName().equals(find)) {
+                students.remove(i);
+                return;
+            }
+        }
+        System.out.println("\nNo such student");
+    }
+
+    static void printStudents(ArrayList<Student> students){
+        if (students.isEmpty()) {
+            System.out.println("\nNo students found.");
+            return;
+        }
+
+        System.out.println("\nAll students:");
+        for (Student student : students) {
+            student.introduce();
+        }
+    }
+
+    static Student exists(ArrayList<Student> students, String find){
+        for (Student student : students) {
+            if (student.getName().equals(find)) {
+                System.out.println("\nStudent found");
+                return student;
+            }
+        }
+        return null;
     }
 }
