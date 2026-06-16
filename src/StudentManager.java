@@ -24,6 +24,7 @@ public class StudentManager {
         for(int i = 0; i < students.size(); i++){
             if(students.get(i).getName().equals(name)){
                 students.remove(i);
+                System.out.println("\nStudent " + name + " has been removed");
                 return;
             }
         }
