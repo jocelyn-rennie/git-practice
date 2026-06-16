@@ -1,10 +1,10 @@
 public class Student {
-    String name;
+    private String name;
     // can initialise
     // static int count = 0;
-    static int count;
-    int age;
-    String course;
+    private static int count;
+    private int age;
+    private String course;
 
     // constructor stops this:
     // Student s1 = new Student();
@@ -17,13 +17,12 @@ public class Student {
         this.course=course;
     }
 
-    public void introduce() {
-        System.out.println("\nStudent:");
-        System.out.println("Name: " + name);
-        System.out.println("Age: " + age);
-        System.out.println("Course: " + course);
-        System.out.println("Current student count: " + count);
-        System.out.println();
+    // instead of printing mem location
+    @Override
+    public String toString() {
+        return "\nStudent: " + "\nName: " + name +
+                "\nAge: " + age +
+                "\nCourse: " + course;
     }
 
     // uses objects so non-static
