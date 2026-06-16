@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -22,7 +23,6 @@ public class Main {
             i++;
         }
 
-         */
 
         System.out.println();
         System.out.println("Enter a number: ");
@@ -32,10 +32,29 @@ public class Main {
         int[] seq = sequence(n);
         System.out.println();
 
-        for( int i =0; i<n; i++){
+        for( i = 0; i<n; i++){
             System.out.println(seq[i]);
         }
+        */
 
+        // ArrayLists
+        // non fixed size
+        ArrayList<String> names = new ArrayList<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+
+        for (int i =0; i<names.size(); i++){
+            System.out.println(names.get(i));
+        }
+
+        names.set(1, "Bobby");
+        names.remove("Bobby");
+
+        // enhanced
+        for (String name : names) {
+            System.out.println(name);
+        }
     }
 
     static int[] sequence(int n){
