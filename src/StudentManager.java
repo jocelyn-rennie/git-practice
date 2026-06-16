@@ -72,8 +72,21 @@ public class StudentManager {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] split = line.split(",");
-                Student student = new Student(split[0], Integer.parseInt(split[1]), split[2]);
-                students.add(student);
+                if(split.length != 3){
+                    // skip invalid student
+                    System.out.println("Invalid student format in file");
+                    continue;
+                }
+                String name = split[0];
+                try{
+                    int age = Integer.parseInt(split[1]);
+                    String course = split[2];
+                    Student student = new Student(name, age, course);
+                    students.add(student);
+                }catch (NumberFormatException e){
+                    System.out.println("Invalid age in file.");
+                    // skip student- invalid
+                }
             }
 
             sc.close();
