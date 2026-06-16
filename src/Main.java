@@ -35,7 +35,7 @@ public class Main {
         for( i = 0; i<n; i++){
             System.out.println(seq[i]);
         }
-        */
+
 
         // ArrayLists
         // non fixed size
@@ -55,8 +55,19 @@ public class Main {
         for (String name : names) {
             System.out.println(name);
         }
+
+        */
+
+        Students one = new Students("Emma");
+        System.out.print("Student: ");
+        System.out.println(one.getName());
+        System.out.print("Student count: ");
+        System.out.println(one.getCount());
     }
 
+    // static method belongs to the class
+    // does this operation need information from a specific object?
+    //Yes → non-static
     static int[] sequence(int n){
         int[] arr = new int[n];
         for(int i = 0; i < n; i++){
