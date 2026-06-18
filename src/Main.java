@@ -1,41 +1,23 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
+// files:
+import java.io.FileWriter;
+import java.io.IOException;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
         /*
-        System.out.println("Hello from B");
-        System.out.println("Test1");
-        System.out.println();
 
         int i=0;
 
         while (i<10){
             System.out.print(i);
-            if (i%2==0){
-                System.out.println(" even");
-            }
-            else{
-                System.out.println(" odd");
-            }
             i++;
         }
-
-
-        System.out.println();
-        System.out.println("Enter a number: ");
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int[] seq = sequence(n);
-        System.out.println();
-
-        for( i = 0; i<n; i++){
-            System.out.println(seq[i]);
-        }
-
 
         // ArrayLists
         // non fixed size
@@ -56,36 +38,14 @@ public class Main {
             System.out.println(name);
         }
 
-        Students one = new Students("Emma", 18, "CS");
-        //one.introduce();
-
-        Students two = new Students("Bob", 20, "Sports");
-        //two.introduce();
-        Students three = new Students("Dave", 19, "Biology");
-        //three.introduce();
-
-        ArrayList <Students> students = new ArrayList <>();
-        students.add(one);
-        students.add(two);
-        students.add(three);
-
-        //printStudents(students);
-
-        remove(students,"Emma");
-
-        printStudents(students);
-
-        remove(students,"Dave");
-
-        printStudents(students);
-
-        remove(students,"Dave");
-
          */
+
+        ArrayList <Student> students = new ArrayList<>();
+        StudentManager sm = new StudentManager(students);
+        sm.retrieveStudents();
 
         Scanner sc = new Scanner(System.in);
         String req;
-        ArrayList <Student> students = new ArrayList<>();
         String name;
         int age;
         String course;
@@ -101,6 +61,7 @@ public class Main {
             req = sc.next();
 
             if(req.equals("5")){
+                sm.saveStudents();
                 break;
             }
 
@@ -108,20 +69,27 @@ public class Main {
                 case "1":
                     System.out.println("\nEnter student name: ");
                     name = sc.next();
-                    System.out.println("Enter student age: ");
-                    age = sc.nextInt();
+                    while (true) {
+                        try {
+                            System.out.println("Enter student age:");
+                            age = sc.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Please enter a valid number.\n");
+                            sc.nextLine(); // clear bad input
+                        }
+                    }
                     System.out.println("Enter student course: ");
                     course = sc.next();
-                    Student student = new Student(name, age, course);
-                    students.add(student);
+                    sm.addStudent(name,age,course);
                     break;
                 case "2":
                     System.out.println("\nEnter student name: ");
                     name = sc.next();
-                    remove(students, name);
+                    sm.removeStudent(name);
                     break;
                 case "3":
-                    printStudents(students);
+                    sm.printStudents();
                     break;
                 case "4":
                     if (students.isEmpty()){
@@ -130,12 +98,12 @@ public class Main {
                     }
                     System.out.println("\nEnter student name: ");
                     name = sc.next();
-                    Student res = exists(students, name);
+                    Student res = sm.findStudent(name);
                     if (res == null){
                         System.out.println("\nStudent does not exist");
                     }
                     else{
-                        res.introduce();
+                        System.out.println(res);
                     }
                     break;
 
@@ -179,7 +147,7 @@ public class Main {
 
         System.out.println("\nAll students:");
         for (Student student : students) {
-            student.introduce();
+            System.out.println(student);
         }
     }
 
