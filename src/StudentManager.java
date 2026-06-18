@@ -11,6 +11,9 @@ public class StudentManager {
         this.students = students;
     }
 
+    public int getCount(){
+        return students.size();
+    }
     public ArrayList<Student> getStudents() {
         return students;
     }
